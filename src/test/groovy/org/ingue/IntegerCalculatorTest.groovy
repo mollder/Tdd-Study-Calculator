@@ -7,16 +7,16 @@ import spock.lang.Specification
 class IntegerCalculatorTest extends Specification {
 
     def calculator
+    def first
+    def second
 
     def setup() {
-        calculator = new Calculator();
+        calculator = new Calculator()
+        first = 5
+        second = 10
     }
 
     def "5 + 10 = 15"() {
-        given:
-        def first = 5
-        def second = 10
-
         when:
         def result = calculator.add(first, second)
 
@@ -25,10 +25,6 @@ class IntegerCalculatorTest extends Specification {
     }
 
     def "5 - 10 = -5"() {
-        given:
-        def first = 5
-        def second = 10
-
         when:
         def result = calculator.sub(first, second)
 
@@ -37,10 +33,6 @@ class IntegerCalculatorTest extends Specification {
     }
 
     def "5 * 10 = 50"() {
-        given:
-        def first = 5
-        def second = 10
-
         when:
         def result = calculator.mul(first, second)
 
@@ -48,13 +40,20 @@ class IntegerCalculatorTest extends Specification {
         result == 50
     }
 
+    def "5 / 10 = 0.5"() {
+        when:
+        def result = calculator.div(first, second)
+
+        then:
+        result == 0.5
+    }
+
     def "0으로 나누면 ZeroDivException 발생"() {
         given:
-        def first = 5
-        def second = 0
+        def zero = 0
 
         when:
-        calculator.div(first, second)
+        calculator.div(first, zero)
 
         then:
         thrown(ZeroDivException.class)
